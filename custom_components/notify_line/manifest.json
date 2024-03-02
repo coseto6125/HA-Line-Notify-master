@@ -1,0 +1,10 @@
+{
+    "domain": "notify_line",
+    "name": "Line Notify",
+    "documentation": "https://github.com/maxmacstn/HA-Line-Notify/blob/master/README.md",
+    "issue_tracker": "https://github.com/maxmacstn/HA-Line-Notify/issues",
+    "dependencies": [],
+    "codeowners": ["@yun-s-oh", "@maxmacstn"],
+    "version": "2022.7.1",
+    "requirements": []
+}
