@@ -1,10 +1,10 @@
 {
     "domain": "notify_line",
     "name": "Line Notify",
-    "documentation": "https://github.com/maxmacstn/HA-Line-Notify/blob/master/README.md",
-    "issue_tracker": "https://github.com/maxmacstn/HA-Line-Notify/issues",
+    "documentation": "https://github.com/coseto6125/HA-Line-Notify/blob/master/README.md",
+    "issue_tracker": "https://github.com/coseto6125/HA-Line-Notify/issues",
     "dependencies": [],
-    "codeowners": ["@yun-s-oh", "@maxmacstn"],
-    "version": "2022.7.1",
+    "codeowners": ["@yun-s-oh", "@maxmacstn","@coseto6125"],
+    "version": "2024.03.03",
     "requirements": []
 }

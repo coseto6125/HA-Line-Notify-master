@@ -13,10 +13,11 @@ With this custom component loaded, you can send messaged to line Notify.
 """
 
 import logging
+from asyncio import run as asy_run
 
 import homeassistant.helpers.config_validation as cv
-import requests
 import voluptuous as vol
+from aiohttp import FormData, request
 from homeassistant.components.notify import (
     ATTR_DATA,
     PLATFORM_SCHEMA,
@@ -60,15 +61,18 @@ class LineNotificationService(BaseNotificationService):
 
     def send_message(self, message="", **kwargs):
         """Send some message."""
+        asy_run(self.async_send_message(message, **kwargs))
+
+    async def async_send_message(self, message="", **kwargs):
         if data := kwargs.get(ATTR_DATA):
             url = data.get(ATTR_URL)
-            file = {IMAGEFILE: open(data.get(ATTR_FILE), "rb")}
+            file_path = data.get(ATTR_FILE)
             stkpkgid = data.get(ATTR_STKPKGID)
             stkid = data.get(ATTR_STKID)
 
         else:
-            url = file = stkpkgid = stkid = None
-        
+            url = file_path = stkpkgid = stkid = None
+
         headers = {"AUTHORIZATION": f"Bearer {self.access_token}"}
 
         payload = {
@@ -79,6 +83,14 @@ class LineNotificationService(BaseNotificationService):
             STKID: stkid,
         }
 
-        r = requests.post(BASE_URL, headers=headers, files=file, data=payload)
-        if r.status_code != 200:
-            _LOGGER.error(r.text)
+        data = FormData()
+        for key, value in payload.items():
+            if value:
+                data.add_field(key, value)
+
+        if file_path:
+            data.add_field(IMAGEFILE, open(file_path, "rb"))
+
+        async with request("POST", BASE_URL, headers=headers, data=data) as r:
+            if r.status != 200:
+                _LOGGER.error(await r.text())
