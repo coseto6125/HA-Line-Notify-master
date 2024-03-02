@@ -83,7 +83,8 @@ script.yaml
 -   Multi-user support : let each user input their own token upon service call.
 -   Simple login: using OAuth to obtain token from Line Notify API.
 
-###
-- The above content is sourced from https://github.com/maxmacstn/HA-Line-Notify. 
-- This git repository is optimized for certain core code and is primarily intended for personal use. 
-- by coseto
+## Declaration
+
+-   The above content is sourced from https://github.com/maxmacstn/HA-Line-Notify.
+-   This git repository is optimized for certain core code and is primarily intended for personal use.
+-   by coseto
