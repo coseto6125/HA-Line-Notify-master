@@ -15,8 +15,6 @@ With this custom component loaded, you can send messaged to line Notify.
 import logging
 from asyncio import run as asy_run
 
-import homeassistant.helpers.config_validation as cv
-import voluptuous as vol
 from aiohttp import FormData, request
 from homeassistant.components.notify import (
     ATTR_DATA,
@@ -24,6 +22,8 @@ from homeassistant.components.notify import (
     BaseNotificationService,
 )
 from homeassistant.const import CONF_ACCESS_TOKEN
+from homeassistant.helpers import config_validation as cv
+from voluptuous import Required as VolRequired
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -41,7 +41,7 @@ STKID = "stickerId"
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     {
-        vol.Required(CONF_ACCESS_TOKEN): cv.string,
+        VolRequired(CONF_ACCESS_TOKEN): cv.string,
     }
 )
 
